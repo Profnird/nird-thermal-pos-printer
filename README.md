@@ -1,0 +1,1 @@
+# nird-thermal-pos-printer
