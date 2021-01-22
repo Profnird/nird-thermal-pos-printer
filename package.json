@@ -22,5 +22,5 @@
     "electron-pos-printer": "^1.2.4",
     "electron-reload": "^1.5.0",
     "jquery": "^3.5.1"
-}
+  }
 }

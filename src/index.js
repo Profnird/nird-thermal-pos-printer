@@ -31,7 +31,7 @@ function createWindow () {
        mainWindow.show();
    })
   // and load the index.html of the app.
-  mainWindow.loadFile('index.html')
+  mainWindow.loadFile('./src/index.html')
 
   // Open the DevTools to debug electron.
    mainWindow.webContents.openDevTools();
