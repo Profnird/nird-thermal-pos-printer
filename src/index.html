@@ -1,10 +1,203 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+      Finacord
+    </title>
+    <!-- notif -->
+    <link rel="stylesheet" href="notif.css">
+    <!-- main-ui css -->
+    <link rel="stylesheet" href="./styles/ui.css">
+    <link rel="stylesheet" href="./styles/printmodal.css">
   </head>
   <body>
-    
+    <div class="container">
+      <div class="content">
+        <div class="saleslink" style="display: flex; justify-content:space-between;">
+          <p>Sales</p>
+          <img src="icon.jpg" alt="" width="70px" height="50px">
+        </div>
+        <div class="summary">
+          <div id="sumtotal">
+            <span class="inner-summary">Total Price</span>
+            <span id="sum-items">2000</span>
+          </div>
+          <div id="sumtotal">
+            <span class="inner-summary">Quantity</span>
+            <span id="sum-price">2</span>
+          </div>
+          <div id="sumtotal">
+            <span class="inner-summary">Tax</span>
+            <span id="tax">0.20</span>
+          </div>
+        </div>
+        <div class="main-content">
+            </div>
+            <form class="form-data" id="form-in" action="index.html" method="post">
+              <output type="text" name="" id="refno" value="#0030040040040"></output>
+              <input type="text" name="name" id="name" class="input-order" placeholder="Customer Name" required>
+              <select name="ipayment" id="ipayment" onchange="pagechangehandler(this.value)" class="input-order" required>
+                <option value="cash">Cash Sales</option>
+                <option id="link-to-debtors" value="debtors">Credit Sales</option>
+              </select>
+              <select class="input-order" id="iproduct" name="" style="margin-top:5px;">
+
+              </select>
+              <input type="number" name="iqty" id="iqty" class="input-order" placeholder="quantity" required>
+              <input type="number" name="iunit" id="iunit" class="input-order" placeholder="unit price" required>
+            </form>
+            <div class="caption-footer">
+              Press Enter to Push
+            </div>
+          </div>
+          <!-- table to view data -->
+          <div class="data-view">
+            <!-- table to view  -->
+            <div class="btn-save">
+              <button id="btn-save-btn" class="bt-save" type="button" name="btn-save">Save</button>
+              <button id="btn-sv" class="bt-clear" type="button" name="btn-clear" onclick="ClearAllRows();">Clear</button>
+            </div>
+            <div class="main-view-table">
+              <br>
+              <br>
+            <table id="data-table">
+              <thead>
+                <tr>
+                  <th>Qty</th>
+                  <th>Unit</th>
+                  <th>Product</th>
+                  <th>Payment</th>
+                  <th>Total</th>
+                  <th>Tax</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="tbody">
+              </tbody>
+            </table>
+            </div>
+          </div>
+        </div>
+        <!-- Trigger/Open The Modal -->
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+
+          <!-- Modal content -->
+          <div class="modal-content">
+            <button id="prnt" style="width:100px; height:50px; font-size: 18px;" type="button" name="button">Print</button>
+            <button id="btn-print-pos" style="width:100px; height:50px; font-size: 18px;border:none;color: white;background-color: blue;" type="button" name="button">Print-Reciept</button>
+            <span class="close" style="background:black;">&times;</span>
+            <div style="background:orangered;" id='list-printers'>
+              <!-- listing printers -->
+            </div>
+            <div class="invoice-view">
+              <div class="main-invoice-container" id="main-invoice-container">
+                <div class="side-invoice-bar">
+                  <div class="title">
+                    <div class="company-info">
+                      <span id="cname">Company-Name</span></br>
+                      <span id="loc">Location</span></br>
+                      <span id="tel">010200202</span></br>
+                      <span id="post">Box 77</span></br>
+                      <span id="mail">email@mail.com</span>
+                    </div>
+                  </div>
+                  <div class="nav-invoice">
+                    <div class="invoicedetail">
+                      Receipt: <span id="in_no">#3</span></br>
+                      Date: <span id="in_date">dd/mm/yyyy</span></br>
+                      Time: <span id="in_time"></span><br>
+                      <span id="in_name"></span></br>
+                    </div>
+                    <!-- <div class="invoicedetail"> -->
+                      <!-- ID: <span id="in_cid">20</span> -->
+                    <!-- </div> -->
+                  </div>
+                </div>
+                <div class="content_invoice">
+                <div class="invoice-content-area" id="invoice_main">
+                  <table id="invoicetrnxtable">
+                    <thead>
+                      <tr>
+                        <th>Qty</th>
+                        <th>Unit</th>
+                        <th>Product</th>
+                        <th>Payment</th>
+                        <th>Total</th>
+                      </tr>
+                    </thead>
+                    <tbody id="invoicetrnx">
+                      <tr>
+                        <td>2</td>
+                        <td>20</td>
+                        <td>Iphone 6</td>
+                        <td>Cash</td>
+                        <td>2000</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="invoice-absolute-footer">
+                  <p>finacord&trade; invoice automation</p>
+                </div>
+              </div>
+              </div>
+              <!-- <p>Finacord&trade;</p> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      window.$ = window.jQuery = require('jquery');
+    </script>
+    <script>
+    var modal = document.getElementById("myModal");
+
+      // Get the button that opens the modal
+      var btn = document.getElementById("btn-save-btn");
+
+      // Get the <span> element that closes the modal
+      var span = document.getElementsByClassName("close")[0];
+
+      // When the user clicks on the button, open the modal
+      // var customer, product,
+      btn.onclick = function() {
+        modal.style.display = "block";
+        var dateObj = new Date();
+        var month = dateObj.getUTCMonth() + 1; //months from 1-12
+        var day = dateObj.getUTCDate();
+        var year = dateObj.getUTCFullYear();
+        var time = dateObj.toLocaleTimeString();
+        var date = year + "/" + month + "/" + day;
+        document.getElementById('in_date').innerHTML = date;
+        document.getElementById('in_time').innerHTML = time;
+      }
+
+      // When the user clicks on <span> (x), close the modal
+      span.onclick = function() {
+        modal.style.display = "none";
+      }
+
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+      }
+      var printbtn = document.getElementById('prnt');
+      printbtn.onclick = function(){
+        // var divToPrint = document.getElementById("main-invoice-container");
+        var newWin = window.print();
+        // newWin.print();
+        // newWin.close();
+      }
+    </script>
+    <!-- pos-printer-scripts -->
+    <script>
+</script>
+<script src="renderer.js"></script>
   </body>
 </html>
