@@ -29,13 +29,13 @@ function createWindow () {
       nodeIntegration: true
     },
     // enableRemoteModule: true
-  })
+  });
 
 
      // waits for program to load visual before showing
    mainWindow.once('ready-to-show', () =>{
        mainWindow.show();
-   })
+   });
   // and load the index.html of the app.
   mainWindow.loadFile('index.html')
 
@@ -69,16 +69,16 @@ app.on('window-all-closed', function () {
 })
 
 
-ipcMain.on('print', (event,arg) => {
-   const data = JSON.parse(arg);
+ipcMain.on('print', (event, arg) => {
+   const printerData = JSON.parse(arg);
    console.log('printerName');
-   PosPrinter.print(data, {
-   preview: true,
-   width: '300px',
+   PosPrinter.print(printerData.data, {
+   preview: false,
+   width: '300',
    margin: '0 0 0 0',
    border: 1,
    copies: 1,
-   printerName: "printerName",
+   printerName: printerData.printerName,
    timeOutPerLine: 400,
    silent: true
    // pageSize: { height: 301000, width: 71000 } // page size
