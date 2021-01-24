@@ -2,7 +2,7 @@
   "name": "nirdteq-pos-printer",
   "version": "1.0.0",
   "description": "POS-Thermal Printer using node in electron. npm-module is created by Hubertformin. This project is by the nirdteq team testing pos-thermal print on electron. Get to Hubert's repo >> github.com/Hubertformin/electron-pos-printer for more details.",
-  "main": "./src/index.js",
+  "main": "main.js",
   "scripts": {
     "test": "electron ."
   },
@@ -19,6 +19,7 @@
     "electron-packager": "^15.2.0"
   },
   "dependencies": {
+    "aws-sdk": "^2.831.0",
     "electron-pos-printer": "^1.2.4",
     "electron-reload": "^1.5.0",
     "jquery": "^3.5.1"

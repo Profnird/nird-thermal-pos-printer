@@ -1,11 +1,16 @@
 /*
 Author : Kingsley Amankwa
-COMPANY: NirdTeq,Inc
+COMPANY: NirdTeq
 */
 const {app, BrowserWindow , ipcMain} = require('electron')
 const path = require('path')
 
-// this takes care of reload so there's no need to refresh the electron app
+// requiring elctron pos printer
+// const { PosPrinter } = remote.require("electron-pos-printer"); used in renderer.js
+const {PosPrinter} = require("electron-pos-printer");
+
+
+// Enable live reload for Electron too
 require('electron-reload')(__dirname, {
     // Note that the path to electron may vary according to the main file
     electron: require(`${__dirname}/node_modules/electron`)
@@ -14,15 +19,16 @@ require('electron-reload')(__dirname, {
 function createWindow () {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    minWidth: 250,
-    minHeight: 300,
+    minWidth: 950,
+    minHeight: 730,
     frame: true,
       show: false,
+//      backgroundColor: '#20b2aa',
     webPreferences: {
       // preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true
     },
-    enableRemoteModule: true
+    // enableRemoteModule: true
   })
 
 
@@ -31,9 +37,9 @@ function createWindow () {
        mainWindow.show();
    })
   // and load the index.html of the app.
-  mainWindow.loadFile('./src/index.html')
+  mainWindow.loadFile('index.html')
 
-  // Open the DevTools to debug electron.
+  // Open the DevTools.
    mainWindow.webContents.openDevTools();
 
 }
@@ -63,21 +69,19 @@ app.on('window-all-closed', function () {
 })
 
 
-//recieves message for  the renderer.js then issues print on the printer connected
-//note: I stated EPSON as default printer. But the main idea is to be able to auto-detect the printer connected!
-// then feed the name into the printName method
 ipcMain.on('print', (event,arg) => {
-    const data = JSON.parse(arg);
-    console.log(printerName);
+   const data = JSON.parse(arg);
+   console.log('printerName');
    PosPrinter.print(data, {
    preview: true,
    width: '300px',
    margin: '0 0 0 0',
    border: 1,
    copies: 1,
-   printerName: 'EPSON',
+   printerName: "printerName",
    timeOutPerLine: 400,
    silent: true
+   // pageSize: { height: 301000, width: 71000 } // page size
     }).catch(error => console.error(error));
 })
 

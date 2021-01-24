@@ -7,17 +7,14 @@
       Finacord
     </title>
     <!-- notif -->
-    <link rel="stylesheet" href="notif.css">
     <!-- main-ui css -->
-    <link rel="stylesheet" href="./styles/ui.css">
-    <link rel="stylesheet" href="./styles/printmodal.css">
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <div class="container">
       <div class="content">
         <div class="saleslink" style="display: flex; justify-content:space-between;">
           <p>Sales</p>
-          <img src="icon.jpg" alt="" width="70px" height="50px">
         </div>
         <div class="summary">
           <div id="sumtotal">
@@ -34,51 +31,12 @@
           </div>
         </div>
         <div class="main-content">
-            </div>
-            <form class="form-data" id="form-in" action="index.html" method="post">
               <output type="text" name="" id="refno" value="#0030040040040"></output>
-              <input type="text" name="name" id="name" class="input-order" placeholder="Customer Name" required>
-              <select name="ipayment" id="ipayment" onchange="pagechangehandler(this.value)" class="input-order" required>
-                <option value="cash">Cash Sales</option>
-                <option id="link-to-debtors" value="debtors">Credit Sales</option>
-              </select>
-              <select class="input-order" id="iproduct" name="" style="margin-top:5px;">
-
-              </select>
-              <input type="number" name="iqty" id="iqty" class="input-order" placeholder="quantity" required>
-              <input type="number" name="iunit" id="iunit" class="input-order" placeholder="unit price" required>
-            </form>
-            <div class="caption-footer">
-              Press Enter to Push
-            </div>
           </div>
-          <!-- table to view data -->
-          <div class="data-view">
-            <!-- table to view  -->
-            <div class="btn-save">
-              <button id="btn-save-btn" class="bt-save" type="button" name="btn-save">Save</button>
-              <button id="btn-sv" class="bt-clear" type="button" name="btn-clear" onclick="ClearAllRows();">Clear</button>
-            </div>
-            <div class="main-view-table">
-              <br>
-              <br>
-            <table id="data-table">
-              <thead>
-                <tr>
-                  <th>Qty</th>
-                  <th>Unit</th>
-                  <th>Product</th>
-                  <th>Payment</th>
-                  <th>Total</th>
-                  <th>Tax</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody id="tbody">
-              </tbody>
-            </table>
-            </div>
-          </div>
+          <select class="selex" id="sl" name="">
+            <option value="EPSON">EPSON</option>
+            <option value="STAR">EPSON</option>
+          </select>
         </div>
         <!-- Trigger/Open The Modal -->
         <!-- The Modal -->
@@ -86,9 +44,7 @@
 
           <!-- Modal content -->
           <div class="modal-content">
-            <button id="prnt" style="width:100px; height:50px; font-size: 18px;" type="button" name="button">Print</button>
             <button id="btn-print-pos" style="width:100px; height:50px; font-size: 18px;border:none;color: white;background-color: blue;" type="button" name="button">Print-Reciept</button>
-            <span class="close" style="background:black;">&times;</span>
             <div style="background:orangered;" id='list-printers'>
               <!-- listing printers -->
             </div>
@@ -198,6 +154,7 @@
     <!-- pos-printer-scripts -->
     <script>
 </script>
-<script src="renderer.js"></script>
+<!-- You can also require other files to run in this process -->
+    <script src="./rend.js"></script>
   </body>
 </html>
