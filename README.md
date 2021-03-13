@@ -3,7 +3,7 @@
 
 //use the below command to install the dependencies
 
-$ npm install 
+# $ npm install 
 
 //This example is created to suit electron developers the most.
 //Fork and share your examples
